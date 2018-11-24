@@ -1,0 +1,62 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+int f[10000];
+void pie(char *pattern)
+{
+    f[0]=0;
+    int k=1,len=0,len_p=strlen(pattern);
+    while(k<len_p)
+    {
+        if(pattern[k]==pattern[len])
+            f[k++]=++len;
+        else
+        {
+            if(len)
+                len=f[len-1];
+            else
+                f[k++]=0;
+        }
+    }
+
+    return;
+}
+
+void kmp_match(char *text,char*pattern)
+{
+    int i=0,j=0,ret=-1,len_t=strlen(text),len_p=strlen(pattern);
+    while(i<len_t)
+    {
+        if(text[i]==pattern[j])
+        {
+            i++;
+            j++;
+            if(j==len_p)
+            {
+                ret=i-len_p;
+                cout<<ret<<endl;
+                j=f[j-1];
+            }
+            }
+            else
+            {
+                if(j)
+                    j=f[j-1];
+                else
+                    i++;
+            }
+
+    }
+
+}
+int main()
+{
+        char a[30],b[20];
+        cin>>a;
+        cin>>b;
+        pie(b);
+        kmp_match(a,b);
+
+
+    return 0;
+}
