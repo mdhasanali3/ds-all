@@ -1,0 +1,42 @@
+
+ int a[]={2,543,56,436,456,474,45,65,3,467,5,76,34,5,7};
+int partion(int a[],int low,int high)
+{
+    int i,j,t,pivot=a[high];
+    for( i=low-1,j=low;j<high;j++)
+    {
+        if(a[j]<pivot)
+        {
+            i++;
+             t=a[j];
+            a[j]=a[i];
+            a[i]=t;
+
+        }
+    }
+
+   t=a[high];
+    a[high]=a[i+1];
+    a[i+1]=t;
+
+    return i+1;
+        }
+void quick_sort(int a[],int low,int high)
+{
+    if(low>=high)
+        return;
+int p;
+p=partion(a,low,high);
+    quick_sort(a,low,p-1);
+    quick_sort(a,p+1,high);
+}
+
+int main()
+{
+    int low=0,high=sizeof(a)/sizeof(a[0]);
+  quick_sort(a,low,high-1);
+
+     for(int i=low;i<high;i++)
+    cout<<a[i]<<" ";
+}
+
