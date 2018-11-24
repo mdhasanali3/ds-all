@@ -1,0 +1,132 @@
+struct node
+{
+    int data;
+    struct node *link;
+};
+
+struct node* head;
+
+void print ()
+{
+
+    struct node* temp;
+    temp=head;
+    while(temp!=0)
+    {
+        cout<<temp->data<<endl;
+        temp=temp->link;
+    }
+}
+void  insert_in_last(int value)
+{
+    struct node *temp=(struct node*)malloc(sizeof(struct node));
+    temp->data=value;
+    temp->link=0;
+    if(head==0)
+    head=temp;
+    else
+    {
+        struct node *t;
+        t=head;
+        while(t->link!=0)
+        {
+            t=t->link;
+        }
+        t->link=temp;
+    }
+
+}
+void insert_in_first(int value)
+{
+    struct node *temp=(struct node*)malloc(sizeof(struct node));
+    temp->data=value;
+    temp->link=head;
+    head=temp;
+}
+void delete_note(int position)
+{
+    if(position==1)
+    {
+        struct node*temp;
+        temp=head;
+        head=head->link;
+        free(temp);
+    }
+    else{
+        struct node *temp1;
+        temp1=head;
+       for(int i=1;i<=position-2 ;i++)
+        {
+            temp1=temp1->link;
+
+        }
+        struct node *temp2;
+        temp2=temp1->link;
+            temp1->link=temp2->link;
+    free(temp2);
+    }
+}
+
+void insert_in_sort_order(int value)
+{
+    struct node* temp=(struct node*)malloc(sizeof(struct node));
+    temp->data=value;
+    if(head==0||temp->data<head->data){
+        temp->link=head;
+        head=temp;
+    }
+    else
+    {
+        struct node* temp1;
+        struct node* temp2;
+         temp1=head;
+        temp2=temp1->link;
+        while(temp2!=0&&temp->data>temp2->data)
+        {
+            temp1=temp2;
+            temp2=temp2->link;
+        }
+        temp1->link=temp;
+        temp->link=temp2;
+  }
+}
+
+int main()
+{
+    head=0;
+
+cout<<endl<<"  lastst insertion    **"<<endl;
+  insert_in_last(21); insert_in_last(71);
+   insert_in_last(221); insert_in_last(31);
+   insert_in_last(111); insert_in_last(861);
+   insert_in_last(671); insert_in_last(156);
+  insert_in_last(16); insert_in_last(176);
+
+   print();
+
+cout<<endl<<"   first insertion    **"<<endl;
+  insert_in_first(11); insert_in_first(100);
+   insert_in_first(111); insert_in_first(108);
+   insert_in_first(200); insert_in_first(101);
+   insert_in_first(11); insert_in_first(91);
+  insert_in_first(191); insert_in_first(1165341);
+
+   print();
+
+cout<<endl<<"   deletion    **"<<endl;
+
+delete_note(2);delete_note(14);
+delete_note(3);delete_note(12);
+delete_note(8);delete_note(1);
+
+    print();
+cout<<endl<<"  insertion in sort order   **"<<endl;
+
+  insert_in_sort_order(89);
+  insert_in_sort_order(457);
+
+    print();
+
+    return 0;
+}
+
