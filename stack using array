@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[6],top=-1;
+struct node
+{
+    int data;
+    node* node;
+
+};
+
+void push(int data)
+{
+    if(top==6-1)
+    {
+        cout<<"overflow";
+        return;
+    }
+    a[++top]=data;
+}
+void print()
+{
+    int i;
+    for(i=0;i<=top;i++)
+    cout<<a[i]<<endl;
+}
+void pop()
+{
+    if(top==-1)
+    {
+        cout<<"empty";
+        return;
+
+    }
+    top--;
+}
+
+
+main()
+{
+
+push(43);
+push(235);
+
+print();
+cout<<"e"<<endl;
+push(2345);
+push(25);
+
+print();
+cout<<"e"<<endl;
+push(45);
+push(2456);
+
+print();
+pop();
+pop();
+pop();
+pop();
+
+cout<<"e"<<endl;
+print();
+cout<<"e"<<endl;
+
+
+}
