@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+#include<vector>
+using namespace std;
+
+main()
+{
+    int n1,n2,i,node,edge;
+    vector<int>v[9];
+    cin>>node>>edge;
+    for(i=0;i<edge;i++)
+{
+    cin>>n1>>n2;
+    v[n1].push_back(n2);
+    v[n2].push_back(n1);
+
+}
+for(i=0;i<v[3].size();i++)
+cout<<"neighbour's are "<<v[3][i]<<" "<<endl;
+
+}
