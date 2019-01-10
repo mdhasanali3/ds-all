@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+
+#define white 1
+#define gray 2
+#define black 3
+using namespace std;
+
+int node,edge,a[100][100],ttime=0,stime[100],fttime[100];
+char color[100];
+
+void dfsvisit(int x)
+{
+ color[x]=gray;
+
+ ttime++;
+ stime[x]=ttime;
+ for(int i=0;i<node;i++)
+    { if(a[x][i]==1)
+    {if(color[i]==white)
+    dfsvisit(i);
+    }
+    }
+    color[x]=black;
+    ttime++;
+    fttime[x]=ttime;
+    cout<<x<<" ";
+}
+
+void dfs()
+{
+    for(int i=0;i<node;i++)
+    color[i]=white;
+    for(int i=0;i<node;i++)
+    {
+        if(color[i]==white)
+            dfsvisit(i);
+    }
+}
+
+main()
+{
+int i,j,k,n1,n2,m,b,g,f=0;
+cin>>node>>edge;
+for(i=0;i<edge;i++)
+{cin>>n1>>n2;
+    a[n1][n2]=1;
+     a[n2][n1]=1;
+}
+cout<<endl<<"dfs output"<<endl;
+dfs();
+
+cout<<endl<<"starting and ending time  "<<endl;
+for(i=0;i<node;i++)
+cout<<"node  "<<(char)('A'+i)<<"   : "<<stime[i]<<"  "<<fttime[i]<<endl;
+}
