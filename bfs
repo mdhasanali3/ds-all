@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+#include<queue>
+#define white 1
+#define gray 2
+#define black 3
+using namespace std;
+
+int a[100][100],x,node,edge;
+char color[100];
+int parrent[100],dis[100];
+void bfs(int sn)
+{
+    for(int i=0;i<node;i++)
+    {
+        color[i]=white;
+        dis[i]=INT_MIN;
+        parrent[i]=-1;
+    }
+    dis[sn]=0;
+    parrent[0]=-1;
+
+    queue<int>q;
+    q.push(sn);
+    while(!q.empty())
+    {
+        int x=q.front();
+        q.pop();
+        cout<<x<<" ";
+        color[x]=gray;
+
+        for(int i=0;i<node;i++)
+        {
+            if(a[x][i]==1)
+            if(color[i]==white)
+            {
+                q.push(i);
+                parrent[i]=x;
+                dis[i]=dis[x]+1;
+            }
+        }
+        color[x]=black;
+    }
+}
+main()
+{
+    int n1,n2,i,j;
+    cin>>node>>edge;
+    for(i=0;i<edge;i++)
+{
+    cin>>n1>>n2;
+    a[n1][n2]=1;
+    a[n2][n1]=1;
+
+}
+cout<<" bfs output"<<endl;
+bfs(0);
+cout<<endl<<"see parrent "<<parrent[5]<<" and distance "<<dis[6];
+}
