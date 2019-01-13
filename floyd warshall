@@ -1,5 +1,11 @@
-#include<bits/stdc++.h>
+input
+4 4
+0 5 99 10
+99 0 3 99
+99 99 0 1
+99 99 99 0
 
+#include<bits/stdc++.h>
 using namespace std;
 
 typedef struct graph
