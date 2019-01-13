@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef struct graph
+{
+    int v,e,*adj;
+};
+void print(graph *g)
+{
+    for(int i=0;i<g->v;i++)
+    {for(int j=0;j<g->v;j++)
+    {
+        cout<<*(g->adj+i*g->v+j)<<"       ";
+    }cout<<endl;
+    }
+}
+
+void algo(graph *g)
+{
+        int i,j,k,n,dist[g->v][g->v];
+
+        for(i=0;i<g->v;i++)
+    {
+        for(j=0;j<g->v;j++)
+        dist[i][j]=*(g->adj+i*g->v+j);
+    }
+
+    for(k=0;k<g->v;k++)
+    {
+        for(i=0;i<g->v;i++)
+        {
+            for(j=0;j<g->v;j++)
+            {
+                if(dist[i][k]+dist[k][j]<dist[i][j])
+                    dist[i][j]=dist[i][k]+dist[k][j];
+            }
+        }
+    }
+
+        for(i=0;i<g->v;i++)
+    {
+        for(j=0;j<g->v;j++)
+        *(g->adj+i*g->v+j)=dist[i][j];
+    }
+
+}
+
+main()
+{
+int i,j,n,v,e;graph *g;
+
+g=(graph*)malloc(sizeof(graph));
+
+cin>>g->v>>g->e;
+g->adj=(int*)malloc((g->v)*(g->v)*sizeof(int));
+for(i=0;i<g->v;i++)
+for(j=0;j<g->v;j++)
+    cin>>*(g->adj+i*g->v+j);
+
+    print(g);
+    cout<<endl<<endl;
+    algo(g);
+    print(g);
+
+}
